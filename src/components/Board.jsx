@@ -60,9 +60,17 @@ function Board({ onWin, onDraw, resetToggle, isGameOver, aiMode }) {
     if (boxes[index] || isGameOver || localGameOver.current) return;
     if (aiMode && turn0) return; // Prevent human from playing as AI
     const newBoxes = [...boxes];
-    newBoxes[index] = 'X';
-    setBoxes(newBoxes);
-    setTurn0(true); // After human, AI's turn
+    if (aiMode) {
+      // Human is always 'X' in AI mode
+      newBoxes[index] = 'X';
+      setBoxes(newBoxes);
+      setTurn0(true); // After human, AI's turn
+    } else {
+      // 2 players mode: alternate between 'X' and '0'
+      newBoxes[index] = turn0 ? '0' : 'X';
+      setBoxes(newBoxes);
+      setTurn0((prev) => !prev); // Toggle turn
+    }
   };
 
   const aiHandleClick = (index) => {
