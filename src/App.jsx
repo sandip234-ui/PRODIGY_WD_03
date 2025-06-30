@@ -46,14 +46,20 @@ function App() {
         <div className="mt-4 flex justify-center gap-4">
           <button
             className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${!aiMode ? 'bg-cyan-500 text-white' : 'bg-slate-700 text-slate-200'}`}
-            onClick={() => setAiMode(false)}
+            onClick={() => {
+              setAiMode(false);
+              resetGame();
+            }}
             disabled={!gameOver && !aiMode}
           >
             2 Players
           </button>
           <button
             className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${aiMode ? 'bg-pink-500 text-white' : 'bg-slate-700 text-slate-200'}`}
-            onClick={() => setAiMode(true)}
+            onClick={() => {
+              setAiMode(true);
+              resetGame();
+            }}
             disabled={!gameOver && aiMode}
           >
             Play vs AI
